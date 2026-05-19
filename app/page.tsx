@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import AboutPage from "../components/aboutme";
 import StackMarquee from "../components/StackMarquee";
+import ProjectsSection from "@/components/projects";
 
 
 export default function Home() {
@@ -45,6 +46,9 @@ export default function Home() {
           <div className="mx-auto w-full max-w-6xl rounded-[2rem] border border-black/5 bg-white/95 px-6 py-8 backdrop-blur-xl transition will-change-transform dark:border-white/10 sm:px-8 md:px-10">
             <StackMarquee />
           </div>
+        </div>
+        <div>
+        <ProjectsSection />
         </div>
       </main>
     </div>
