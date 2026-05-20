@@ -143,21 +143,18 @@ export default function Hero() {
           user-select: none;
         }
         .hero-fuel {
-          display: inline;
+          display: inline-block;
           padding: 0 0.25em;
           border-radius: 4px;
           white-space: normal;
-          overflow-wrap: anywhere;
-          word-break: break-word;
         }
         .hero-font-display {
           overflow-wrap: break-word;
           word-break: break-word;
-          max-width: 100%;
         }
 
         @media (max-width: 640px) {
-          .hero-fuel { padding: 0 0.12em; display: inline; }
+          .hero-fuel { padding: 0 0.12em; }
         }
       `;
       document.head.appendChild(style);
@@ -229,7 +226,6 @@ export default function Hero() {
                   color: "#0f0f0f",
                   overflowWrap: "break-word",
                   wordBreak: "break-word",
-                  maxWidth: "100%",
                 }}
               >
                 I build{" "}
@@ -239,6 +235,7 @@ export default function Hero() {
                 <br />
                 <span className="hero-fuel"
                   style={{
+                    display: "inline-block",
                     background: "#18181b",
                     color: "#fafafa",
                   }}
