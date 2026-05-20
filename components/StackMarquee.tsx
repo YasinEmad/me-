@@ -31,12 +31,13 @@ export default function StackMarquee() {
 
   return (
     <section
-      id="stack"
+      id="skills"
       style={{
         borderTop: "1px solid rgba(0,0,0,0.08)",
         padding: "clamp(2rem,4vw,3rem) 0",
         overflow: "hidden",
         background: "linear-gradient(180deg, #f9fafb 0%, #ffffff 100%)",
+        scrollMarginTop: 96,
       }}
     >
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(1.5rem,5vw,4rem)" }}>

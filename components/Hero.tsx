@@ -150,13 +150,12 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      id="about"
       className="hero-font-body relative overflow-hidden"
       style={{ paddingTop: "clamp(1.5rem,4vw,3rem)", paddingBottom: "clamp(1.5rem,4vw,3rem)" }}
     >
       {/* Decorative floating blobs */}
       <div
-        className="hero-float-a pointer-events-none absolute -top-20 -right-20 opacity-[0.07] hero-animate-6"
+        className="hero-float-a pointer-events-none absolute -top-20 -right-20 opacity-[0.07] hero-animate-6 hidden sm:block"
         style={{
           width: 340,
           height: 340,
@@ -165,7 +164,7 @@ export default function Hero() {
         }}
       />
       <div
-        className="hero-float-b pointer-events-none absolute bottom-0 left-1/3 opacity-[0.05] hero-animate-6"
+        className="hero-float-b pointer-events-none absolute bottom-0 left-1/3 opacity-[0.05] hero-animate-6 hidden sm:block"
         style={{
           width: 220,
           height: 220,
@@ -240,7 +239,7 @@ export default function Hero() {
 
             {/* Body text */}
             <p
-              className="hero-animate-3 max-w-lg text-base leading-7 text-zinc-500"
+              className="hero-animate-3 max-w-full sm:max-w-lg text-base leading-7 text-zinc-500"
               style={{ fontWeight: 300, letterSpacing: "0.01em" }}
             >
              This portfolio is where my ideas turn into digital magic
@@ -297,16 +296,16 @@ Scroll around and watch the wizardry happen
 
         {/* ── RIGHT COLUMN — Lottie + decorative frame ── */}
         <div
-          className="hero-animate-6 relative mx-auto flex items-center justify-center"
-          style={{ width: "min(380px, 90vw)", height: "min(380px, 90vw)" }}
+          className="hero-animate-6 relative mx-auto flex w-full max-w-[420px] items-center justify-center sm:max-w-[360px]"
+          style={{ width: "min(420px, 90vw)", height: "min(420px, 90vw)" }}
         >
           {/* Outer pulse ring */}
           <div
-            className="hero-pulse pointer-events-none absolute inset-0 rounded-full"
+            className="hero-pulse pointer-events-none absolute inset-0 rounded-full hidden sm:block"
             style={{ border: "1.5px solid rgba(0,0,0,0.18)" }}
           />
           {/* Spinning dashed ring */}
-          <div className="hero-lottie-ring pointer-events-none" />
+          <div className="hero-lottie-ring pointer-events-none absolute hidden sm:block" />
 
           {/* Background circle */}
           <div
@@ -329,7 +328,7 @@ Scroll around and watch the wizardry happen
           ].map((pos, i) => (
             <div
               key={i}
-              className="hero-spin pointer-events-none absolute"
+              className="hero-spin pointer-events-none absolute hidden sm:block"
               style={{
                 ...pos,
                 width: 20,
@@ -345,10 +344,11 @@ Scroll around and watch the wizardry happen
 
           {/* Lottie animation */}
           <div
-            style={{ width: "72%", height: "72%", position: "relative", zIndex: 2 }}
+            className="relative z-20 flex h-full w-full items-center justify-center min-h-[260px] min-w-[260px] sm:min-h-[320px] sm:min-w-[320px]"
+            style={{ width: "100%", height: "100%" }}
             dangerouslySetInnerHTML={{
               __html:
-                '<lottie-player src="/12345.json" background="transparent" speed="1" loop autoplay style="width:100%;height:100%;"></lottie-player>',
+                '<lottie-player src="/12345.json" background="transparent" speed="1" loop autoplay style="display:block;width:100%;height:100%;"></lottie-player>',
             }}
           />
 

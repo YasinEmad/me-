@@ -1,10 +1,9 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Hero from "../components/Hero";
-import AboutPage from "../components/aboutme";
+import HeroAboutStack from "../components/HeroAboutStack";
 import StackMarquee from "../components/StackMarquee";
 import ProjectsSection from "@/components/projects";
-import ContactSection from "../components/contact";
+import ProjectsContactStack from "../components/ProjectsContactStack";
 
 export default function Home() {
   return (
@@ -13,13 +12,7 @@ export default function Home() {
       <main className="mx-auto max-w-10xl px-6 py-16 lg:px-10">
         <div className="relative overflow-visible py-4 sm:py-6">
           <div className="mx-auto w-full max-w-6xl rounded-[2rem] border border-black/5 bg-white/95 px-6 py-8 backdrop-blur-xl transition will-change-transform dark:border-white/10 sm:px-8 md:px-10">
-            <Hero />
-          </div>
-        </div>
-
-        <div className="relative overflow-visible pt-4 pb-0 sm:pt-6 sm:pb-0">
-          <div className="mx-auto w-full max-w-6xl rounded-[2rem] border border-black/5 bg-white/95 px-6 py-8 backdrop-blur-xl transition will-change-transform dark:border-white/10 sm:px-8 md:px-10">
-            <AboutPage />
+            <HeroAboutStack />
           </div>
         </div>
 
@@ -49,7 +42,7 @@ export default function Home() {
         </div>
         <div>
           <ProjectsSection />
-          <ContactSection />
+          <ProjectsContactStack />
           <Footer />
         </div>
       </main>

@@ -156,8 +156,12 @@ export default function AboutPage() {
         }
 
         @media (max-width:768px) {
-          .ap-who-grid  { grid-template-columns:1fr !important; }
-          .ap-stats-grid{ grid-template-columns:repeat(2,1fr) !important; }
+          .ap-who-grid   { grid-template-columns:1fr !important; }
+          .ap-stats-grid { grid-template-columns:repeat(2,1fr) !important; }
+          .ap-hero-2     { grid-template-columns:1fr !important; gap:1.5rem !important; }
+          .ap-hero-3     { max-width:100% !important; }
+          .ap-fact-row   { flex-direction:column; gap:1rem; align-items:flex-start; }
+          .ap-fact-row span { min-width:auto !important; }
         }
       `;
       document.head.appendChild(style);
@@ -173,7 +177,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <section className="ap-font-body ap-move-section" style={{ color: "#18181b", overflowX: "hidden" }}>
+    <section className="ap-font-body ap-move-section" style={{ color: "#18181b", overflowX: "hidden", scrollMarginTop: 96 }}>
 
       {/* ══════════════════════════════════════════════
           HERO — full-width, no image, no buttons
@@ -195,7 +199,7 @@ export default function AboutPage() {
         </div>
 
         {/* Full-width headline + animation */}
-        <div className="ap-hero-2" style={{ marginBottom: "2.5rem", display: "grid", gap: "2rem", gridTemplateColumns: "1.2fr 0.8fr", alignItems: "center" }}>
+        <div className="ap-hero-2 grid gap-8 md:grid-cols-[1.2fr_0.8fr] items-center" style={{ marginBottom: "2.5rem" }}>
           <h1
             className="ap-font-display"
             style={{
@@ -223,9 +227,9 @@ export default function AboutPage() {
             <br />
             
           </h1>
-          <div style={{ width: "100%", maxWidth: 420, minHeight: 320 }}>
+          <div className="w-full max-w-[420px] min-h-[260px] sm:min-h-[320px]">
             <div
-              style={{ width: "100%", height: "100%", minHeight: 320 }}
+              className="w-full h-full min-h-[260px] sm:min-h-[320px]"
               dangerouslySetInnerHTML={{
                 __html:
                   '<lottie-player src="/about.json" background="transparent" speed="1" loop autoplay style="width:100%;height:100%;"></lottie-player>',
@@ -254,7 +258,7 @@ export default function AboutPage() {
       ══════════════════════════════════════════════ */}
       <section style={{ borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(1.5rem,5vw,4rem)" }}>
-          <div className="ap-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)" }}>
+          <div className="ap-stats-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((s, i) => (
               <RevealBlock key={s.label} delay={i * 80}>
                 <div style={{
@@ -284,7 +288,7 @@ export default function AboutPage() {
           <SectionLabel number="02" label="Who is Yasin anyway" />
         </RevealBlock>
 
-        <div className="ap-who-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem,6vw,6rem)", alignItems: "start" }}>
+        <div className="ap-who-grid grid gap-[clamp(3rem,6vw,6rem)] md:grid-cols-2" style={{ alignItems: "start" }}>
 
           {/* Left: editorial pull-quote + body copy */}
           <RevealBlock delay={60}>

@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 
 const navItems = [
+  { href: "#hero", label: "Hero" },
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
-  { href: "#StackMarquee", label: "Skills" },
+  { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -143,7 +143,7 @@ export default function Header() {
       },
       { rootMargin: "-40% 0px -55% 0px" }
     );
-    ["about", "projects", "skills", "contact"].forEach((id) => {
+    ["hero", "about", "projects", "skills", "contact"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -191,7 +191,7 @@ export default function Header() {
           style={{ gap: 36, alignItems: "center" }}
         >
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.href}
               href={item.href}
               className={`hdr-nav-link${active === item.href ? " active" : ""}`}
@@ -200,7 +200,7 @@ export default function Header() {
             >
               {item.label}
               <span className="underline-track" />
-            </Link>
+            </a>
           ))}
         </nav>
 
@@ -257,7 +257,7 @@ export default function Header() {
         >
           <nav style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             {navItems.map((item, i) => (
-              <Link
+              <a
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
@@ -287,7 +287,7 @@ export default function Header() {
                 >
                   0{i + 1}
                 </span>
-              </Link>
+              </a>
             ))}
           </nav>
 
