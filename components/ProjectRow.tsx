@@ -400,7 +400,7 @@ export default function ProjectRow({ project, index }: { project: Project; index
     <motion.div style={{ height: "clamp(500px,60vw,700px)", y: cardY, scale: cardScale, opacity: cardOpacity, rotate: cardRotate, zIndex: 1 }}>
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
         {project.animation && (
-          <div style={{
+          <div className={`project-animation ${project.id === "03" ? "project-animation--doctor" : project.id === "02" ? "project-animation--security" : ""}`} style={{
             position: 'absolute',
             top: project.id === "03" ? -80 : -60,
             left: '50%',

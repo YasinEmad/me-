@@ -150,6 +150,36 @@ const CSS = `
     .ps-proj-row { grid-template-columns: 1fr !important; gap: 3rem !important; }
     .ps-proj-row > div:nth-child(1) { order: 2; }
     .ps-proj-row > div:nth-child(2) { order: 1; }
+
+    .project-animation {
+      top: -60px !important;
+    }
+
+    .project-animation--doctor {
+      width: 420px !important;
+      height: 260px !important;
+    }
+
+    .project-animation--security {
+      width: 360px !important;
+      height: 220px !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-animation {
+      top: -50px !important;
+    }
+
+    .project-animation--doctor {
+      width: 320px !important;
+      height: 220px !important;
+    }
+
+    .project-animation--security {
+      width: 280px !important;
+      height: 190px !important;
+    }
   }
 `;
 

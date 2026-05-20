@@ -82,7 +82,7 @@ function LottieContainer({ src }: { src: string }) {
     };
   }, [src]);
 
-  return <div ref={ref} style={{ width: '100%', minHeight: 520, height: '100%', transform: 'translateY(-30px) scale(0.7)', transformOrigin: 'center top' }} />;
+  return <div ref={ref} className="contact-lottie" style={{ width: '100%', minHeight: 520, height: '100%', transform: 'translateY(-30px) scale(0.7)', transformOrigin: 'center top' }} />;
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -426,9 +426,48 @@ function ContactHero() {
 ══════════════════════════════════════════════════════════ */
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  .contact-lottie {
+    width: 100%;
+    min-height: 520px;
+    height: 100%;
+    transform-origin: center top;
+  }
+
+  @media (max-width: 940px) {
+    .contact-animation-wrapper {
+      min-height: 420px;
+    }
+
+    .contact-right {
+      padding-left: 0 !important;
+      border-left: none !important;
+      padding-top: 1.5rem !important;
+    }
+
+    .cf-layout {
+      gap: 2rem !important;
+    }
+  }
+
   @media (max-width: 640px) {
     .cf-two-col { grid-template-columns: 1fr !important; }
-    .cf-layout   { grid-template-columns: 1fr !important; }
+    .cf-layout   { grid-template-columns: 1fr !important; gap: 1rem !important; }
+
+    .contact-animation-wrapper {
+      min-height: auto !important;
+      align-items: flex-start !important;
+    }
+
+    .contact-right {
+      padding-top: 0.6rem !important;
+    }
+
+    .contact-lottie {
+      min-height: 220px !important;
+      height: auto !important;
+      transform: translateY(0) scale(0.85) !important;
+    }
   }
 `;
 
@@ -455,12 +494,12 @@ export default function ContactSection() {
           style={{ display: "grid", gridTemplateColumns: "1.8fr 0.45fr", gap: "clamp(2.5rem,5vw,5rem)", alignItems: "start" }}
         >
           {/* Left: Contact animation */}
-          <div style={{ position: 'relative', minHeight: 540, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <div className="contact-animation-wrapper" style={{ position: 'relative', minHeight: 540, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
             <LottieContainer src="/Contactus.json" />
           </div>
 
           {/* Right: Creative social links */}
-          <div style={{ paddingTop: 8, paddingLeft: 28, borderLeft: '1px solid rgba(26, 25, 25, 0.89)' }}>
+          <div className="contact-right" style={{ paddingTop: 8, paddingLeft: 28, borderLeft: '1px solid rgba(26, 25, 25, 0.89)' }}>
             <CreativeSocials />
           </div>
         </div>
