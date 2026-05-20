@@ -10,7 +10,6 @@ export default function Hero() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Load lottie player
     if (!document.getElementById("lottie-player-script")) {
       const s = document.createElement("script");
       s.src =
@@ -20,7 +19,6 @@ export default function Hero() {
       document.body.appendChild(s);
     }
 
-    // Inject keyframes + styles
     if (!document.getElementById("hero-styles")) {
       const style = document.createElement("style");
       style.id = "hero-styles";
@@ -142,6 +140,7 @@ export default function Hero() {
           transform: rotate(180deg);
           user-select: none;
         }
+
         .hero-fuel {
           display: inline-block;
           padding: 0 0.25em;
@@ -153,21 +152,113 @@ export default function Hero() {
           word-break: break-word;
         }
 
-        @media (max-width: 640px) {
-          .hero-fuel { padding: 0 0.12em; }
+        /* ── Stat badges: always visible but repositioned on mobile ── */
+        .hero-badge-projects {
+          position: absolute;
+          background: #18181b;
+          color: #fafafa;
+          border-radius: 10px;
+          padding: 8px 14px;
+          font-size: 12px;
+          font-weight: 500;
+          z-index: 10;
+          line-height: 1.4;
+          display: flex;
+          flex-direction: column;
+          /* mobile: bottom-right inside the circle */
+          bottom: 4%;
+          right: 4%;
+        }
+
+        .hero-badge-skills {
+          position: absolute;
+          background: white;
+          color: #18181b;
+          border-radius: 10px;
+          padding: 8px 14px;
+          font-size: 12px;
+          font-weight: 500;
+          z-index: 10;
+          border: 1px solid rgba(0,0,0,0.08);
+          line-height: 1.4;
+          display: flex;
+          flex-direction: column;
+          /* mobile: top-left inside the circle */
+          top: 4%;
+          left: 4%;
+        }
+
+        /* On sm+ screens restore the original bleed-out positions */
+        @media (min-width: 640px) {
+          .hero-badge-projects {
+            bottom: 10%;
+            right: -18px;
+          }
+          .hero-badge-skills {
+            top: 8%;
+            left: -18px;
+          }
+        }
+
+        /* Lottie circle wrapper: clamp size tightly on mobile */
+        .hero-lottie-wrap {
+          position: relative;
+          margin: 0 auto;
+          /* full-width on xs, capped at 320 on sm, 420 on lg */
+          width: min(72vw, 320px);
+          height: min(72vw, 320px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        @media (min-width: 640px) {
+          .hero-lottie-wrap {
+            width: min(360px, 90vw);
+            height: min(360px, 90vw);
+          }
+        }
+        @media (min-width: 1024px) {
+          .hero-lottie-wrap {
+            width: 420px;
+            height: 420px;
+          }
+        }
+
+        /* Bottom line lottie */
+        .hero-line-lottie {
+          width: 100%;
+          max-width: 2000px;
+          height: 60px;
+          transform: scaleY(0.5);
+          transform-origin: center;
         }
       `;
       document.head.appendChild(style);
     }
   }, []);
 
+  const defaultSocials = [
+    { label: "GitHub", url: "https://github.com/YasinEmad" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/yasin-emad-b4326529b/?skipRedirect=true" },
+    { label: "Email", url: "mailto:yemad7676@gmail.com" },
+  ];
+
   return (
     <section
       ref={containerRef}
       className="hero-font-body relative"
-      style={{ overflowX: "hidden", overflowY: "visible", paddingTop: "clamp(1.5rem,4vw,3rem)", paddingBottom: "clamp(1.5rem,4vw,3rem)" }}
+      style={{
+        overflowX: "hidden",
+        overflowY: "visible",
+        /* tighter on mobile, generous on desktop */
+        paddingTop: "clamp(1rem, 4vw, 3rem)",
+        paddingBottom: "clamp(1rem, 4vw, 3rem)",
+        /* ensure section doesn't overflow viewport */
+        maxWidth: "100%",
+        boxSizing: "border-box",
+      }}
     >
-      {/* Decorative floating blobs */}
+      {/* Decorative floating blobs — hidden on mobile to avoid overflow */}
       <div
         className="hero-float-a pointer-events-none absolute -top-20 -right-20 opacity-[0.07] hero-animate-6 hidden sm:block"
         style={{
@@ -193,126 +284,15 @@ export default function Hero() {
         style={{ width: 1, height: "100%", background: "rgba(0,0,0,0.07)" }}
       />
 
-      <div className="relative z-10 grid gap-16 lg:grid-cols-[1fr_380px] lg:items-center">
-        {/* ── LEFT COLUMN ── */}
-        <div className="flex gap-5">
-          {/* Side number rail */}
-          <div className="hidden flex-col items-center gap-4 pt-1 lg:flex">
-            <span className="hero-number hero-animate-6">01 — PORTFOLIO</span>
-            <div style={{ flex: 1, width: 1, background: "rgba(0,0,0,0.1)", minHeight: 60 }} />
-          </div>
+      {/*
+        Layout:
+        - mobile  : single column, lottie on top (reversed order via flex-col-reverse)
+        - lg+     : two-column grid
+      */}
+      <div className="relative z-10 flex flex-col gap-8 lg:grid lg:grid-cols-[1fr_380px] lg:items-center lg:gap-16">
 
-          {/* Content */}
-          <div className="flex-1 space-y-8">
-            {/* Eyebrow */}
-            <div className="hero-animate-1 flex items-center gap-3">
-              <span className="hero-dot" />
-              <p
-                className="hero-font-body text-xs font-medium uppercase tracking-[0.3em] text-zinc-400"
-              >
-                Hello, I'm a Yasin
-              </p>
-            </div>
-
-            {/* Headline */}
-            <div className="hero-animate-2">
-              <h1
-                className="hero-font-display"
-                style={{
-                  fontSize: "clamp(2.4rem, 5.5vw, 4.2rem)",
-                  fontWeight: 900,
-                  lineHeight: 1.08,
-                  letterSpacing: "-0.02em",
-                  color: "#0f0f0f",
-                  overflowWrap: "break-word",
-                  wordBreak: "break-word",
-                }}
-              >
-                I build{" "}
-                <span style={{ fontStyle: "italic", color: "#3f3f46" }}>powerful</span>
-                <br />
-                web software
-                <br />
-                <span className="hero-fuel"
-                  style={{
-                    display: "inline-block",
-                    background: "#18181b",
-                    color: "#fafafa",
-                  }}
-                >
-                   fueled by caffeine
-                </span>
-              </h1>
-            </div>
-
-            {/* Divider */}
-            <div
-              className="hero-animate-3 hero-line-reveal"
-              style={{ color: "rgba(0,0,0,0.1)", maxWidth: 440 }}
-            />
-
-            {/* Body text */}
-            <p
-              className="hero-animate-3 max-w-full sm:max-w-lg text-base leading-7 text-zinc-500"
-              style={{ fontWeight: 300, letterSpacing: "0.01em" }}
-            >
-             This portfolio is where my ideas turn into digital magic
-Expect smooth animations, clean code, and a little developer chaos.
-Scroll around and watch the wizardry happen
-            </p>
-
-            {/* Social pills */}
-            <div className="hero-animate-4 flex flex-wrap gap-2">
-              {(socials || [
-                { label: "GitHub", url: "https://github.com/YasinEmad" },
-                { label: "LinkedIn", url: "https://www.linkedin.com/in/yasin-emad-b4326529b/?skipRedirect=true" },
-                { label: "Email", url: "mailto:yemad7676@gmail.com" },
-              ]).map((social) => (
-                <a
-                  key={social.label}
-                  href={social.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hero-tag hero-font-body"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 6,
-                    borderRadius: 999,
-                    border: "1px solid rgba(0,0,0,0.12)",
-                    padding: "7px 18px",
-                    fontSize: 13,
-                    fontWeight: 500,
-                    color: "#18181b",
-                    letterSpacing: "0.02em",
-                    textDecoration: "none",
-                  }}
-                >
-                  <span
-                    style={{
-                      width: 5,
-                      height: 5,
-                      borderRadius: "50%",
-                      background: "#18181b",
-                      display: "inline-block",
-                      flexShrink: 0,
-                    }}
-                  />
-                  {social.label}
-                </a>
-              ))}
-            </div>
-
-            {/* Skill chips row */}
-         
-          </div>
-        </div>
-
-        {/* ── RIGHT COLUMN — Lottie + decorative frame ── */}
-        <div
-          className="hero-animate-6 relative mx-auto flex w-full max-w-[420px] items-center justify-center -translate-y-6 sm:translate-y-0 sm:max-w-[360px]"
-          style={{ width: "min(420px, 90vw)", height: "min(420px, 90vw)" }}
-        >
+        {/* ── LOTTIE (top on mobile, right on desktop) ── */}
+        <div className="hero-animate-6 hero-lottie-wrap lg:order-2">
           {/* Outer pulse ring */}
           <div
             className="hero-pulse pointer-events-none absolute inset-0 rounded-full hidden sm:block"
@@ -333,7 +313,7 @@ Scroll around and watch the wizardry happen
             }}
           />
 
-          {/* Corner accents */}
+          {/* Corner accents — hidden on mobile so they don't bleed */}
           {[
             { top: -10, left: "50%", transform: "translateX(-50%)" },
             { bottom: -10, left: "50%", transform: "translateX(-50%)" },
@@ -358,30 +338,16 @@ Scroll around and watch the wizardry happen
 
           {/* Lottie animation */}
           <div
-            className="relative z-20 flex h-full w-full items-center justify-center min-h-[180px] min-w-[180px] sm:min-h-[260px] sm:min-w-[260px] md:sm:min-h-[320px] md:sm:min-w-[320px]"
-            style={{ width: "100%", height: "100%" }}
+            className="relative z-20 flex items-center justify-center"
+            style={{ width: "80%", height: "80%" }}
             dangerouslySetInnerHTML={{
               __html:
                 '<lottie-player src="/12345.json" background="transparent" speed="1" loop autoplay style="display:block;width:100%;height:100%;"></lottie-player>',
             }}
           />
 
-          {/* Small stat badges */}
-          <div
-            className="hero-font-body hero-float-a absolute hidden sm:flex"
-            style={{
-              bottom: "10%",
-              right: "-18px",
-              background: "#18181b",
-              color: "#fafafa",
-              borderRadius: 10,
-              padding: "10px 16px",
-              fontSize: 12,
-              fontWeight: 500,
-              zIndex: 10,
-              lineHeight: 1.4,
-            }}
-          >
+          {/* Stat badges — responsive via CSS classes */}
+          <div className="hero-font-body hero-badge-projects hero-float-a">
             <div style={{ fontSize: 20, fontWeight: 700, fontFamily: "Playfair Display, serif" }}>
               18+
             </div>
@@ -390,22 +356,7 @@ Scroll around and watch the wizardry happen
             </div>
           </div>
 
-          <div
-            className="hero-font-body hero-float-b absolute hidden sm:flex"
-            style={{
-              top: "8%",
-              left: "-18px",
-              background: "white",
-              color: "#18181b",
-              borderRadius: 10,
-              padding: "10px 16px",
-              fontSize: 12,
-              fontWeight: 500,
-              zIndex: 10,
-              border: "1px solid rgba(0,0,0,0.08)",
-              lineHeight: 1.4,
-            }}
-          >
+          <div className="hero-font-body hero-badge-skills hero-float-b">
             <div style={{ fontSize: 20, fontWeight: 700, fontFamily: "Playfair Display, serif" }}>
               20+
             </div>
@@ -414,39 +365,144 @@ Scroll around and watch the wizardry happen
             </div>
           </div>
         </div>
+
+        {/* ── LEFT COLUMN (content) ── */}
+        <div className="flex gap-5 lg:order-1">
+          {/* Side number rail — desktop only */}
+          <div className="hidden flex-col items-center gap-4 pt-1 lg:flex">
+            <span className="hero-number hero-animate-6">01 — PORTFOLIO</span>
+            <div style={{ flex: 1, width: 1, background: "rgba(0,0,0,0.1)", minHeight: 60 }} />
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 space-y-6 sm:space-y-8">
+            {/* Eyebrow */}
+            <div className="hero-animate-1 flex items-center gap-3">
+              <span className="hero-dot" />
+              <p className="hero-font-body text-xs font-medium uppercase tracking-[0.3em] text-zinc-400">
+                Hello, I'm Yasin
+              </p>
+            </div>
+
+            {/* Headline */}
+            <div className="hero-animate-2">
+              <h1
+                className="hero-font-display"
+                style={{
+                  /* starts at 2rem on tiny phones, grows to 4.2rem on desktop */
+                  fontSize: "clamp(2rem, 7vw, 4.2rem)",
+                  fontWeight: 900,
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.02em",
+                  color: "#0f0f0f",
+                  overflowWrap: "break-word",
+                  wordBreak: "break-word",
+                }}
+              >
+                I build{" "}
+                <span style={{ fontStyle: "italic", color: "#3f3f46" }}>powerful</span>
+                <br />
+                web software
+                <br />
+                <span
+                  className="hero-fuel"
+                  style={{
+                    display: "inline-block",
+                    background: "#18181b",
+                    color: "#fafafa",
+                  }}
+                >
+                  &nbsp;fueled by caffeine
+                </span>
+              </h1>
+            </div>
+
+            {/* Divider */}
+            <div
+              className="hero-animate-3 hero-line-reveal"
+              style={{ color: "rgba(0,0,0,0.1)", maxWidth: 440 }}
+            />
+
+            {/* Body text */}
+            <p
+              className="hero-animate-3 max-w-full sm:max-w-lg text-sm sm:text-base leading-7 text-zinc-500"
+              style={{ fontWeight: 300, letterSpacing: "0.01em" }}
+            >
+
+This portfolio is where my ideas turn into digital magic Expect smooth animations, clean code, and a little developer chaos. Scroll around and watch the wizardry happen            </p>
+
+            {/* Social pills */}
+            <div className="hero-animate-4 flex flex-wrap gap-2">
+              {(socials || defaultSocials).map((social) => (
+                <a
+                  key={social.label}
+                  href={social.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-tag hero-font-body"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    borderRadius: 999,
+                    border: "1px solid rgba(0,0,0,0.12)",
+                    /* slightly smaller padding on mobile */
+                    padding: "6px 14px",
+                    fontSize: 12,
+                    fontWeight: 500,
+                    color: "#18181b",
+                    letterSpacing: "0.02em",
+                    textDecoration: "none",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 5,
+                      height: 5,
+                      borderRadius: "50%",
+                      background: "#18181b",
+                      display: "inline-block",
+                      flexShrink: 0,
+                    }}
+                  />
+                  {social.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Bottom scroll cue */}
       <div
-        className="hero-animate-6 hero-font-body mt-16 flex items-center gap-3"
-        style={{ color: "#a1a1aa", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase" }}
+        className="hero-animate-6 hero-font-body mt-10 sm:mt-16 flex items-center gap-3"
+        style={{
+          color: "#a1a1aa",
+          fontSize: 11,
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+        }}
       >
-        <div
-          style={{
-            width: 32,
-            height: 1,
-            background: "rgba(0,0,0,0.18)",
-          }}
-        />
+        <div style={{ width: 32, height: 1, background: "rgba(0,0,0,0.18)" }} />
         Scroll to explore
       </div>
 
-      {/* End hero animation */}
- <div className="hero-animate-6 mt-10 flex justify-center">
-  <div
-    style={{
-      width: "min(1000vw, 3000px)",
-      height: "60px",
-      maxWidth: 2000,
-      transform: "scaleY(0.5)", // يقلل السمك فقط
-      transformOrigin: "center",
-    }}
-    dangerouslySetInnerHTML={{
-      __html:
-        '<lottie-player src="/line.json" background="transparent" speed="1" loop autoplay style="width:100%;height:100%;"></lottie-player>',
-    }}
-  />
-</div>
+      {/* End hero line animation */}
+      <div className="hero-animate-6 mt-10 flex justify-center">
+        <div
+          style={{
+            width: "min(1000vw, 3000px)",
+            height: "60px",
+            maxWidth: 2000,
+            transform: "scaleY(0.5)", // يقلل السمك فقط
+            transformOrigin: "center",
+          }}
+          dangerouslySetInnerHTML={{
+            __html:
+              '<lottie-player src="/line.json" background="transparent" speed="1" loop autoplay style="width:100%;height:100%;"></lottie-player>',
+          }}
+        />
+      </div>
     </section>
   );
 }
