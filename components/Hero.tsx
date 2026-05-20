@@ -146,6 +146,11 @@ export default function Hero() {
           display: inline-block;
           padding: 0 0.25em;
           border-radius: 4px;
+          white-space: normal;
+        }
+        .hero-font-display {
+          overflow-wrap: break-word;
+          word-break: break-word;
         }
 
         @media (max-width: 640px) {
@@ -159,8 +164,8 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="hero-font-body relative overflow-hidden"
-      style={{ paddingTop: "clamp(1.5rem,4vw,3rem)", paddingBottom: "clamp(1.5rem,4vw,3rem)" }}
+      className="hero-font-body relative"
+      style={{ overflowX: "hidden", overflowY: "visible", paddingTop: "clamp(1.5rem,4vw,3rem)", paddingBottom: "clamp(1.5rem,4vw,3rem)" }}
     >
       {/* Decorative floating blobs */}
       <div
@@ -219,6 +224,8 @@ export default function Hero() {
                   lineHeight: 1.08,
                   letterSpacing: "-0.02em",
                   color: "#0f0f0f",
+                  overflowWrap: "break-word",
+                  wordBreak: "break-word",
                 }}
               >
                 I build{" "}
@@ -303,7 +310,7 @@ Scroll around and watch the wizardry happen
 
         {/* ── RIGHT COLUMN — Lottie + decorative frame ── */}
         <div
-          className="hero-animate-6 relative mx-auto flex w-full max-w-[420px] items-center justify-center sm:max-w-[360px]"
+          className="hero-animate-6 relative mx-auto flex w-full max-w-[420px] items-center justify-center -translate-y-6 sm:translate-y-0 sm:max-w-[360px]"
           style={{ width: "min(420px, 90vw)", height: "min(420px, 90vw)" }}
         >
           {/* Outer pulse ring */}
