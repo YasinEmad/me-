@@ -14,9 +14,9 @@ export default function ProjectsContactStack() {
   });
 
   // تأثير صعود كارت الـ Contact من أسفل الشاشة وتكبير حجمه بنعومة أثناء السكرول الطبيعي لصفحة الموقع
-  const contactY = useTransform(scrollYProgress, [0, 0.8], ["100px", "0px"]);
-  const contactOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
-  const contactScale = useTransform(scrollYProgress, [0, 0.8], [0.95, 1]);
+  const contactY = useTransform(scrollYProgress, [0, 0.3], ["80px", "0px"]);
+  const contactOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+  const contactScale = useTransform(scrollYProgress, [0, 0.3], [0.96, 1]);
 
   return (
     // h-auto عادي جداً يخليه يتدفق طبيعي مع الصفحة بدون تعقيد أو حبس للسكرول
