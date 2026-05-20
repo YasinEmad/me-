@@ -71,14 +71,14 @@ const ArrowUpRight = ({ size = 14 }) => (
   </svg>
 );
 
-function LottieContainer({ src }: { src: string }) {
+function LottieContainer({ src, isMobile }: { src: string; isMobile: boolean }) {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const renderPlayer = () => {
       if (!ref.current) return;
       const source = encodeURI(src);
-      ref.current.innerHTML = `<lottie-player src="${source}" background="transparent" speed="1" loop autoplay style="width:100%;height:100%;display:block;"></lottie-player>`;
+      ref.current.innerHTML = `<lottie-player src="${source}" background="transparent" speed="1" loop autoplay style="width:100%;height:100%;min-height:100%;display:block;"></lottie-player>`;
     };
 
     if (!document.querySelector('script[data-lottie]')) {
@@ -96,7 +96,7 @@ function LottieContainer({ src }: { src: string }) {
     };
   }, [src]);
 
-  return <div ref={ref} className="contact-lottie" style={{ width: '100%', minHeight: 520, height: '100%', transform: 'translateY(-30px) scale(0.7)', transformOrigin: 'center top' }} />;
+  return <div ref={ref} className="contact-lottie" style={{ width: '100%', minHeight: isMobile ? 260 : 520, height: 'auto', transform: isMobile ? undefined : 'translateY(-30px) scale(0.7)', transformOrigin: 'center top' }} />;
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -445,7 +445,8 @@ const CSS = `
   .contact-lottie {
     width: 100%;
     min-height: 520px;
-    height: 100%;
+    height: auto;
+    display: block;
     transform-origin: center top;
   }
 
@@ -479,9 +480,9 @@ const CSS = `
     }
 
     .contact-lottie {
-      min-height: 220px !important;
+      min-height: 260px !important;
       height: auto !important;
-      transform: translateY(0) scale(0.85) !important;
+      transform: none !important;
     }
   }
 `;
@@ -516,7 +517,7 @@ export default function ContactSection() {
         >
           {/* Left: Contact animation */}
           <div className="contact-animation-wrapper" style={{ position: 'relative', minHeight: isMobile ? 320 : 540, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <LottieContainer src="/Contactus.json" />
+            <LottieContainer src="/Contactus.json" isMobile={isMobile} />
           </div>
 
           {/* Right: Creative social links */}
