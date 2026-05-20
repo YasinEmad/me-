@@ -13,12 +13,6 @@ const NAV = [
   { label: "Contact",  href: "#contact"  },
 ];
 
-const SOCIALS = [
-  { label: "WhatsApp", href: "https://wa.me/1017844312" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/yasin-emad-b4326529b/?skipRedirect=true" },
-  { label: "GitHub",   href: "https://github.com/YasinEmad" },
-];
-
 const YEAR = new Date().getFullYear();
 
 /* ══════════════════════════════════════════════════════════
@@ -125,37 +119,6 @@ function FooterNavLink({ item, i }: { item: { label: string; href: string }; i: 
 /* ══════════════════════════════════════════════════════════
    SOCIAL LINK
 ══════════════════════════════════════════════════════════ */
-function SocialLink({ s, i }: { s: { label: string; href: string }; i: number }) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <motion.a
-      href={s.href}
-      target="_blank"
-      rel="noreferrer"
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.3 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      style={{
-        display: "inline-flex", alignItems: "center", gap: 6,
-        fontFamily: "'DM Sans',sans-serif",
-        fontSize: 12, fontWeight: 500,
-        letterSpacing: "0.08em",
-        color: hovered ? "#18181b" : "#a1a1aa",
-        textDecoration: "none",
-        transition: "color 0.2s ease",
-      }}
-    >
-      {s.label}
-      <motion.span animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : -3, y: hovered ? 0 : 3 }}
-        transition={{ duration: 0.2 }}>
-        <ArrowUpRight />
-      </motion.span>
-    </motion.a>
-  );
-}
 
 
 
@@ -168,7 +131,6 @@ const CSS = `
   @media (max-width: 640px) {
     .footer-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
     .footer-bottom { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
-    .footer-socials { flex-wrap: wrap !important; }
   }
 `;
 
@@ -195,12 +157,12 @@ export default function Footer() {
       {/* ── Main body ── */}
       <div style={{ padding: "clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem)", maxWidth: 1200, margin: "0 auto" }}>
 
-        {/* Grid: tagline | nav | socials | back-to-top */}
+        {/* Grid: tagline | nav | back-to-top */}
         <div
           className="footer-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr auto",
+            gridTemplateColumns: "2fr 1fr auto",
             gap: "clamp(2rem,4vw,4rem)",
             alignItems: "start",
             marginBottom: "clamp(3rem,5vw,4rem)",
@@ -279,28 +241,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 3 — Socials */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              style={{
-                fontFamily: "'DM Sans',sans-serif",
-                fontSize: 9, fontWeight: 600,
-                letterSpacing: "0.24em", textTransform: "uppercase",
-                color: "#343436", marginBottom: 18,
-              }}
-            >
-              Follow
-            </motion.div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {SOCIALS.map((s, i) => <SocialLink key={s.label} s={s} i={i} />)}
-            </div>
-          </div>
-
-          {/* Col 4 — Back to top */}
+          {/* Col 3 — Back to top */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -357,36 +298,6 @@ export default function Footer() {
             <span style={{ fontFamily: "'Playfair Display',serif", fontStyle: "italic", color: "#2e2e34" }}>Yasin</span>
           </motion.div>
 
-          {/* Right — social row inline */}
-          <motion.div
-            className="footer-socials"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.55 }}
-            style={{ display: "flex", gap: 20, alignItems: "center" }}
-          >
-            {SOCIALS.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  fontFamily: "'DM Sans',sans-serif",
-                  fontSize: 10, fontWeight: 500,
-                  letterSpacing: "0.14em", textTransform: "uppercase",
-                  color: "#303035",
-                  textDecoration: "none",
-                  transition: "color 0.2s ease",
-                }}
-                onMouseEnter={e => e.currentTarget.style.color = "#64646d"}
-                onMouseLeave={e => e.currentTarget.style.color = "#323236"}
-              >
-                {s.label}
-              </a>
-            ))}
-          </motion.div>
         </div>
       </div>
 

@@ -142,6 +142,15 @@ export default function Hero() {
           transform: rotate(180deg);
           user-select: none;
         }
+        .hero-fuel {
+          display: inline-block;
+          padding: 0 0.25em;
+          border-radius: 4px;
+        }
+
+        @media (max-width: 640px) {
+          .hero-fuel { padding: 0 0.12em; }
+        }
       `;
       document.head.appendChild(style);
     }
@@ -217,13 +226,11 @@ export default function Hero() {
                 <br />
                 web software
                 <br />
-                <span
+                <span className="hero-fuel"
                   style={{
                     display: "inline-block",
                     background: "#18181b",
                     color: "#fafafa",
-                    padding: "0 0.25em",
-                    borderRadius: 4,
                   }}
                 >
                    fueled by caffeine
@@ -344,7 +351,7 @@ Scroll around and watch the wizardry happen
 
           {/* Lottie animation */}
           <div
-            className="relative z-20 flex h-full w-full items-center justify-center min-h-[260px] min-w-[260px] sm:min-h-[320px] sm:min-w-[320px]"
+            className="relative z-20 flex h-full w-full items-center justify-center min-h-[180px] min-w-[180px] sm:min-h-[260px] sm:min-w-[260px] md:sm:min-h-[320px] md:sm:min-w-[320px]"
             style={{ width: "100%", height: "100%" }}
             dangerouslySetInnerHTML={{
               __html:
@@ -354,7 +361,7 @@ Scroll around and watch the wizardry happen
 
           {/* Small stat badges */}
           <div
-            className="hero-font-body hero-float-a absolute"
+            className="hero-font-body hero-float-a absolute hidden sm:flex"
             style={{
               bottom: "10%",
               right: "-18px",
@@ -377,7 +384,7 @@ Scroll around and watch the wizardry happen
           </div>
 
           <div
-            className="hero-font-body hero-float-b absolute"
+            className="hero-font-body hero-float-b absolute hidden sm:flex"
             style={{
               top: "8%",
               left: "-18px",
