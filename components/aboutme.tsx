@@ -186,15 +186,6 @@ export default function AboutPage() {
           position: "relative",
         }}
       >
-        {/* Decorative crosshair */}
-        <div className="ap-hero-5" style={{ position: "absolute", top: "10%", right: "4%", opacity: 0.05, pointerEvents: "none" }}>
-          <div style={{ position: "relative", width: 100, height: 100 }}>
-            <div style={{ position: "absolute", top: "50%", left: 0, right: 0, height: 1, background: "#18181b" }} />
-            <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 1, background: "#18181b" }} />
-            <div className="ap-spin" style={{ position: "absolute", inset: 14, border: "1px solid #18181b", borderRadius: "50%" }} />
-          </div>
-        </div>
-
         {/* Eyebrow */}
         <div className="ap-hero-1" style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "2.5rem" }}>
           <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#18181b" }} />

@@ -64,10 +64,10 @@ const projects = [
     description:
       "Cyber-Mind is a comprehensive, full-stack cybersecurity learning platform structured as a modern JavaScript monorepo that connects a robust backend to an interactive user experience. The server-side ecosystem uses Node.js and Express to drive specialized execution engines for puzzles, coding challenges, and dynamic Capture The Flag (CTF) gameplay. It relies on a PostgreSQL database managed by Sequelize ORM featuring automated, recoverable schema migrations, alongside a Gemini API integration designed for AI-driven code evaluation. Secure authentication is handled through Firebase, utilizing a Google Sign-In flow, cookie-based sessions, and granular role-based access controls for users and administrators. On the frontend, a responsive user interface is built with React, TypeScript, and Vite, using Redux Toolkit for seamless state management and Framer Motion for smooth, animated route transitions. Finally, the application ties everything together with a dedicated admin dashboard for user permissions, challenge management, and template configuration.",
     outcome: "↑ 41% conversion rate uplift",
-    accent: "#c8956c",
+    accent: "#bd5343",
     github: "https://github.com/YasinEmad/Cyber-Mind",
     website: "https://cyber-mind-three.vercel.app/",
-    animation: "/Cyber Safety.json",
+    animation: "/security.json",
     images: [
       "/puzzles.png",
       "/profile.png",
@@ -85,7 +85,7 @@ const projects = [
     description:
       "FullStack-Bedaya is a modern, production-ready enterprise healthcare management system designed to streamline clinical workflows and administrative tasks. Built using a robust TypeScript ecosystem, it unifies a comprehensive suite of modules including multi-clinic patient records, pharmacy inventory tracking, and laboratory test management. The backend is powered by Node.js and Express (compatible with the Bun runtime) alongside a PostgreSQL database managed via Sequelize ORM, featuring real-time data sync via    Socket.io, robust JWT security, and detailed compliance auditing. On the frontend, a highly responsive, accessible user interface is delivered using React 18, Vite, and Tailwind CSS, backed by a sophisticated state-management architecture utilizing Redux Toolkit, React Query for server states, and Zod schema validation. The repository follows an organized monorepo structure complete with shared data validation schemas, interactive OpenAPI/Swagger documentation, comprehensive automated test suites using Vitest, and advanced database seeding scripts for performance evaluation.",
     outcome: "#1 Product of the Day",
-    accent: "#4fc3f7",
+    accent: "#8dda55",
     github: "https://github.com/YasinEmad/Bedaya-v2/tree/main",
     website: "https://bedaya2.ggpanel.site/",
     animation: "/Doctor holding medical instrument.json",

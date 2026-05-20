@@ -159,8 +159,8 @@ function ProjectImageCard({ project }: { project: Project }) {
             cursor: "pointer",
             transition: "background 0.2s ease, transform 0.2s ease",
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.32)"; e.currentTarget.style.transform = "translateY(-50%) scale(1.08)"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.18)"; e.currentTarget.style.transform = "translateY(-50%) scale(1)"; }}
+          onMouseEnter={e => { e.currentTarget.style.background = "rgba(12, 11, 11, 0.32)"; e.currentTarget.style.transform = "translateY(-50%) scale(1.08)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "rgba(0, 0, 0, 0.18)"; e.currentTarget.style.transform = "translateY(-50%) scale(1)"; }}
         >
           <Icon />
         </button>
@@ -189,17 +189,17 @@ function ProjectImageCard({ project }: { project: Project }) {
         position: "absolute", bottom: 0, left: 0, right: 0,
         padding: "14px 18px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: "rgba(10,10,14,0.72)",
+        background: "rgba(0,0,0,0.95)",
         backdropFilter: "blur(14px)",
         WebkitBackdropFilter: "blur(14px)",
-        borderTop: "1px solid rgba(255,255,255,0.07)",
+        borderTop: "1px solid rgba(255, 255, 255, 0.08)",
         zIndex: 10,
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <span style={{
             fontFamily: "'Playfair Display',serif",
             fontSize: 13, fontStyle: "italic",
-            color: "rgba(255,255,255,0.5)",
+            color: "rgba(255, 255, 255, 0.8)",
           }}>
             {String(current + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </span>
@@ -213,8 +213,8 @@ function ProjectImageCard({ project }: { project: Project }) {
             style={{
               display: "inline-flex", alignItems: "center", gap: 7,
               padding: "7px 14px", borderRadius: 999,
-              background: "rgba(255,255,255,0.1)",
-              border: "1px solid rgba(255,255,255,0.14)",
+              background: "rgba(0, 0, 0, 0.1)",
+              border: "1px solid rgba(0, 0, 0, 0.14)",
               color: "rgba(255,255,255,0.85)",
               fontFamily: "'DM Sans',sans-serif",
               fontSize: 12, fontWeight: 500,

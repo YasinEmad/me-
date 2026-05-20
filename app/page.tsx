@@ -4,7 +4,7 @@ import Hero from "../components/Hero";
 import AboutPage from "../components/aboutme";
 import StackMarquee from "../components/StackMarquee";
 import ProjectsSection from "@/components/projects";
-
+import ContactSection from "../components/contact";
 
 export default function Home() {
   return (
@@ -48,7 +48,9 @@ export default function Home() {
           </div>
         </div>
         <div>
-        <ProjectsSection />
+          <ProjectsSection />
+          <ContactSection />
+          <Footer />
         </div>
       </main>
     </div>

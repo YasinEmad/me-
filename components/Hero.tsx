@@ -251,10 +251,9 @@ Scroll around and watch the wizardry happen
             {/* Social pills */}
             <div className="hero-animate-4 flex flex-wrap gap-2">
               {(socials || [
-                { label: "GitHub", url: "#" },
-                { label: "LinkedIn", url: "#" },
-                { label: "Twitter", url: "#" },
-                { label: "Email", url: "#" },
+                { label: "GitHub", url: "https://github.com/YasinEmad" },
+                { label: "LinkedIn", url: "https://www.linkedin.com/in/yasin-emad-b4326529b/?skipRedirect=true" },
+                { label: "Email", url: "mailto:yemad7676@gmail.com" },
               ]).map((social) => (
                 <a
                   key={social.label}

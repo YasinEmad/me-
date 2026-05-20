@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from "react";
 const navItems = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
-  { href: "#skills", label: "Skills" },
+  { href: "#StackMarquee", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -14,6 +14,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("#about");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const navRef = useRef(null);
 
@@ -153,6 +154,18 @@ export default function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize, { passive: true });
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) setMenuOpen(false);
+  }, [isMobile]);
+
   return (
     <header
       className="hdr-root sticky top-0 z-50 w-full"
@@ -160,8 +173,8 @@ export default function Header() {
         background: scrolled ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.6)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
-        borderBottom: scrolled ? "1px solid rgba(0,0,0,0.09)" : "1px solid transparent",
-        transition: "background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
+        borderBottom: "none",
+        transition: "background 0.3s ease, box-shadow 0.3s ease",
         boxShadow: "none",
       }}
     >
@@ -169,55 +182,7 @@ export default function Header() {
         className="relative mx-auto flex max-w-6xl items-center justify-between"
         style={{ padding: "0 24px", height: 64 }}
       >
-        {/* ── LOGO ── */}
-        <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
-          {/* Small geometric mark */}
-          <div
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 6,
-              background: "#18181b",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}
-          >
-            <div
-              style={{
-                width: 10,
-                height: 10,
-                borderRadius: 2,
-                border: "2px solid rgba(255,255,255,0.7)",
-                transform: "rotate(45deg)",
-              }}
-            />
-          </div>
-          <span
-            className="hdr-logo-serif"
-            style={{
-              fontSize: 17,
-              fontWeight: 700,
-              color: "#18181b",
-              letterSpacing: "-0.01em",
-            }}
-          >
-            Portfolio
-          </span>
-          {/* Italic edition label */}
-          <span
-            className="hdr-logo-serif"
-            style={{
-              fontSize: 12,
-              fontStyle: "italic",
-              fontWeight: 400,
-              color: "#a1a1aa",
-              marginLeft: 2,
-              display: "none",
-            }}
-          />
-        </Link>
+        <div style={{ width: 1, minWidth: 1 }} />
 
         {/* ── CENTER NAV (desktop) ── */}
         <nav
@@ -241,21 +206,6 @@ export default function Header() {
 
         {/* ── RIGHT SIDE ── */}
         <div className="flex items-center gap-4">
-          {/* Available badge */}
-          <div
-            className="hidden items-center gap-2 md:flex"
-            style={{
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "#52525b",
-            }}
-          >
-            <span className="hdr-live-dot" />
-            Available
-          </div>
-
           <div className="hdr-divider hidden md:block" />
 
           {/* CTA pill */}
@@ -269,37 +219,38 @@ export default function Header() {
                 display: "inline-block",
               }}
             />
-            Hire me
+            resume 
           </a>
 
           {/* Mobile burger */}
-          <button
-            className={`hdr-burger md:hidden${menuOpen ? " open" : ""}`}
-            onClick={() => setMenuOpen((o) => !o)}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "6px 2px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 4,
-            }}
-            aria-label="Toggle menu"
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+          {isMobile && (
+            <button
+              className={`hdr-burger${menuOpen ? " open" : ""}`}
+              onClick={() => setMenuOpen((o) => !o)}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: "6px 2px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 4,
+              }}
+              aria-label="Toggle menu"
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          )}
         </div>
       </div>
 
       {/* ── MOBILE MENU ── */}
-      {menuOpen && (
+      {isMobile && menuOpen && (
         <div
-          className="hdr-mobile-menu md:hidden"
+          className="hdr-mobile-menu"
           style={{
-            borderTop: "1px solid rgba(0,0,0,0.07)",
             background: "rgba(255,255,255,0.97)",
             padding: "16px 24px 24px",
           }}
@@ -350,35 +301,6 @@ export default function Header() {
         </div>
       )}
 
-      {/* Bottom progress bar */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: "1.5px",
-          background: "rgba(0,0,0,0.04)",
-          overflow: "hidden",
-        }}
-      >
-        {navItems.map((item, i) => (
-          <div
-            key={item.href}
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: `${(i / navItems.length) * 100}%`,
-              width: `${100 / navItems.length}%`,
-              height: "100%",
-              background: "#18181b",
-              transform: active === item.href ? "scaleX(1)" : "scaleX(0)",
-              transformOrigin: "left",
-              transition: "transform 0.4s cubic-bezier(.22,1,.36,1)",
-            }}
-          />
-        ))}
-      </div>
     </header>
   );
 }
