@@ -15,8 +15,22 @@ import {
 const CONTACT = {
   whatsapp: "https://wa.me/1017844312",
   linkedin: "https://www.linkedin.com/in/yasin-emad-b4326529b/",
-  gmail: "mailto:yemad7676@gmail.com",
+  gmail: "mailto:yemad7676@gmail.com.com",
 };
+
+function useIsMobile(breakpoint = 640) {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < breakpoint : false
+  );
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < breakpoint);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, [breakpoint]);
+
+  return isMobile;
+}
 
 /* ══════════════════════════════════════════════════════════
    SVG ICONS
@@ -370,6 +384,7 @@ function ContactForm() {
    HERO
 ══════════════════════════════════════════════════════════ */
 function ContactHero() {
+  const isMobile = useIsMobile();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-5%" });
 
@@ -377,7 +392,7 @@ function ContactHero() {
     <div style={{ position: "relative", marginBottom: "clamp(3rem,6vw,5rem)" }}>
       <div ref={ref} style={{ position: "relative", zIndex: 1 }}>
 
-        <div className="cf-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 420px', gap: '1.5rem', alignItems: 'start' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 420px', gap: '1.5rem', alignItems: 'start' }}>
           <div>
             <motion.h1
               initial={{ opacity: 0, y: 36 }} animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -475,6 +490,8 @@ const CSS = `
    MAIN EXPORT
 ══════════════════════════════════════════════════════════ */
 export default function ContactSection() {
+  const isMobile = useIsMobile();
+
   useEffect(() => {
     if (!document.getElementById("contact-styles-v2")) {
       const el = document.createElement("style");
@@ -490,16 +507,20 @@ export default function ContactSection() {
       <ContactHero />
         {/* Two-column layout */}
         <div
-          className="cf-layout"
-          style={{ display: "grid", gridTemplateColumns: "1.8fr 0.45fr", gap: "clamp(2.5rem,5vw,5rem)", alignItems: "start" }}
+          style={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr" : "1.8fr 0.45fr",
+            gap: isMobile ? "1.5rem" : "clamp(2.5rem,5vw,5rem)",
+            alignItems: "start",
+          }}
         >
           {/* Left: Contact animation */}
-          <div className="contact-animation-wrapper" style={{ position: 'relative', minHeight: 540, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <div className="contact-animation-wrapper" style={{ position: 'relative', minHeight: isMobile ? 320 : 540, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
             <LottieContainer src="/Contactus.json" />
           </div>
 
           {/* Right: Creative social links */}
-          <div className="contact-right" style={{ paddingTop: 8, paddingLeft: 28, borderLeft: '1px solid rgba(26, 25, 25, 0.89)' }}>
+          <div className="contact-right" style={{ paddingTop: 8, paddingLeft: isMobile ? 0 : 28, borderLeft: isMobile ? 'none' : '1px solid rgba(26, 25, 25, 0.89)' }}>
             <CreativeSocials />
           </div>
         </div>
