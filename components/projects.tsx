@@ -40,7 +40,7 @@ const projects = [
     id: "01",
     title: "Bode",
     subtitle: "CRM Real Estate Dashboard",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "web push", "zod"],
+    tags: ["Next.js", "TypeScript", "MongoDB", "web push", "zod"],
     description:
       "Bode CRM is a complete real estate sales system built with Next.js to help companies organize their daily work easily. It smoothly manages the whole sales process, tracking everything from finding a new customer to officially closing the deal. The platform includes a smart commission tool that automatically calculates payments for multiple people and sends them to managers for approval. To make sure employees are working where they should be, it uses highly accurate GPS tracking to check their location when they log in for work. Built with a strong Node.js and MongoDB backend, it keeps data secure, controls what different users can see, and sends instant system updates. Overall, Bode CRM gives real estate agencies the clear team oversight and performance goals they need to successfully grow their sales.",
     accent: "#4667f8",

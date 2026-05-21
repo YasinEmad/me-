@@ -216,7 +216,7 @@ export default function Header() {
 
           {/* CTA pill */}
           <a
-            href="/Yasin_Emad_CV(2)-2.pdf"
+            href="/Yasin_Emad_CV(2).pdf"
             download
             className="hdr-pill hidden md:inline-flex"
           >
