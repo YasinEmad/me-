@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, createElement, type ReactNode } from "react";
 import {
   motion,
   useScroll,
@@ -72,31 +72,37 @@ const ArrowUpRight = ({ size = 14 }) => (
 );
 
 function LottieContainer({ src, isMobile }: { src: string; isMobile: boolean }) {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const [playerLoaded, setPlayerLoaded] = useState(false);
 
   useEffect(() => {
-    const renderPlayer = () => {
-      if (!ref.current) return;
-      const source = encodeURI(src);
-      ref.current.innerHTML = `<lottie-player src="${source}" background="transparent" speed="1" loop autoplay style="width:100%;height:100%;min-height:100%;display:block;"></lottie-player>`;
-    };
+    import("@lottiefiles/lottie-player")
+      .then(() => setPlayerLoaded(true))
+      .catch(() => setPlayerLoaded(true));
+  }, []);
 
-    if (!document.querySelector('script[data-lottie]')) {
-      const s = document.createElement('script');
-      s.src = 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js';
-      s.setAttribute('data-lottie', 'true');
-      s.onload = () => renderPlayer();
-      document.head.appendChild(s);
-    } else {
-      renderPlayer();
-    }
-
-    return () => {
-      if (ref.current) ref.current.innerHTML = '';
-    };
-  }, [src]);
-
-  return <div ref={ref} className="contact-lottie" style={{ width: '100%', minHeight: isMobile ? 260 : 520, height: 'auto', transform: isMobile ? undefined : 'translateY(-30px) scale(0.7)', transformOrigin: 'center top' }} />;
+  return (
+    <div
+      className="contact-lottie"
+      style={{
+        width: "100%",
+        minHeight: isMobile ? 320 : 540,
+        height: isMobile ? 320 : 540,
+        maxWidth: "100%",
+        transform: isMobile ? undefined : "translateY(-30px) scale(0.7)",
+        transformOrigin: "center top",
+      }}
+    >
+      {playerLoaded &&
+        createElement("lottie-player", {
+          src,
+          background: "transparent",
+          speed: "1",
+          loop: true,
+          autoplay: true,
+          style: { width: "100%", height: "100%", display: "block" },
+        })}
+    </div>
+  );
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -471,7 +477,8 @@ const CSS = `
     .cf-layout   { grid-template-columns: 1fr !important; gap: 1rem !important; }
 
     .contact-animation-wrapper {
-      min-height: auto !important;
+      min-height: 320px !important;
+      height: auto !important;
       align-items: flex-start !important;
     }
 

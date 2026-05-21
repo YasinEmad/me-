@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import HeroAboutStack from "../components/HeroAboutStack";
 import StackMarquee from "../components/StackMarquee";
 import ProjectsSection from "@/components/projects";
-import ProjectsContactStack from "../components/ProjectsContactStack";
+import ContactSection from "../components/contact";
 
 export default function Home() {
   return (
@@ -42,7 +42,7 @@ export default function Home() {
         </div>
         <div>
           <ProjectsSection />
-          <ProjectsContactStack />
+          <ContactSection />
           <Footer />
         </div>
       </main>
