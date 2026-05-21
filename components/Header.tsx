@@ -182,7 +182,13 @@ export default function Header() {
         className="relative mx-auto flex max-w-6xl items-center justify-between"
         style={{ padding: "0 24px", height: 64 }}
       >
-        <div style={{ width: 1, minWidth: 1 }} />
+        <a href="/" aria-label="Home" style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
+          <img
+            src="/logo.png"
+            alt="Logo"
+            style={{ height: 44, width: "auto", display: "block" }}
+          />
+        </a>
 
         {/* ── CENTER NAV (desktop) ── */}
         <nav
@@ -209,7 +215,11 @@ export default function Header() {
           <div className="hdr-divider hidden md:block" />
 
           {/* CTA pill */}
-          <a href="#contact" className="hdr-pill hidden md:inline-flex">
+          <a
+            href="/Yasin_Emad_CV(2)-2.pdf"
+            download
+            className="hdr-pill hidden md:inline-flex"
+          >
             <span
               style={{
                 width: 5,
